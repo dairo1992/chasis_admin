@@ -1,19 +1,25 @@
 name: chasis_admin
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
   sdk: ^3.10.7
 
 dependencies:
+  app_core:
+    path: E:/Proyectos/Flutter/Modernizacion/flutter_core_package
+  flutter_bloc: ^9.1.1
   flutter:
     sdk: flutter
+  get_it: ^9.2.1
+  go_router: ^17.1.0
+  shadcn_ui: ^0.53.3
 
 dev_dependencies:
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^6.0.0
 
 flutter:
   uses-material-design: true
