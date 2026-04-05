@@ -1,3 +1,4 @@
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app_core/app_core.dart';
 import '../../domain/usecases/login_use_case.dart';
@@ -21,7 +22,7 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
     final result = await _loginUseCase(
       LoginParams(email: event.email, password: event.password),
     );
-
+    debugPrint('Login result: $result');
     result.fold((failure) => emit(LoginFailure(failure)), (success) {
       if (success) {
         emit(const LoginSuccess());

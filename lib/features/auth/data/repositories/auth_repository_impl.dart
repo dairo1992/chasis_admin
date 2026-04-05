@@ -8,7 +8,7 @@ class AuthRepositoryImpl with RepositoryErrorHandler implements AuthRepository {
     required String password,
   }) async {
     // Mock login for now
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 3));
     if (email == 'admin@admin.com' && password == 'admin') {
       return const Right(true);
     }

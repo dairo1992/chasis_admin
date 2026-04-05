@@ -5,12 +5,12 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:chasis_admin/core/ui/atomic/organisms/main_header.dart';
 import 'package:chasis_admin/core/ui/atomic/organisms/main_footer.dart';
 
-class ResponsiveMainTemplate extends StatelessWidget {
-  const ResponsiveMainTemplate({
+class ResponsiveLayout extends StatelessWidget {
+  const ResponsiveLayout({
     super.key,
-    this.web,
-    this.mobile,
-    this.tablet,
+    required this.web,
+    required this.mobile,
+    required this.tablet,
     this.headerExceptions = const [],
     this.footerExceptions = const [],
     this.header = const MainHeader(),
@@ -18,13 +18,13 @@ class ResponsiveMainTemplate extends StatelessWidget {
   });
 
   /// Widget for large screens (Web/Desktop)
-  final Widget? web;
+  final Widget web;
 
   /// Widget for small screens (Mobile)
-  final Widget? mobile;
+  final Widget mobile;
 
   /// Widget for medium screens (Tablet)
-  final Widget? tablet;
+  final Widget tablet;
 
   /// List of platforms where the header should NOT be displayed.
   final List<DisplayPlatform> headerExceptions;

@@ -17,13 +17,14 @@ class _AppState extends State<App> {
       themeMode: ThemeMode.dark,
       darkTheme: ShadThemeData(
         brightness: Brightness.dark,
-        colorScheme: const ShadSlateColorScheme.light(),
+        colorScheme: const ShadSlateColorScheme.dark(),
       ),
       appBuilder: (context) => MaterialApp.router(
         routerConfig: AppRouter.builRouter(),
         debugShowCheckedModeBanner: false,
         title: Strings.I.appName,
         theme: Theme.of(context),
+        builder: (context, child) => ShadAppBuilder(child: child!),
       ),
     );
   }
