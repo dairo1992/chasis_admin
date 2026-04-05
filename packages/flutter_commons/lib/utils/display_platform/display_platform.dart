@@ -1,0 +1,1 @@
+enum DisplayPlatform { app, web }

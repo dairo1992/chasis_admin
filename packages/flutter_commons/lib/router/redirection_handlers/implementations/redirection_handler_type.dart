@@ -1,0 +1,1 @@
+enum RedirectionHandlerType { routeDataValidation }

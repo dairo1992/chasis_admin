@@ -4,8 +4,8 @@ packages:
   app_core:
     dependency: "direct main"
     description:
-      path: "E:\\Proyectos\\Flutter\\Modernizacion\\flutter_core_package"
-      relative: false
+      path: "packages/flutter_core_package"
+      relative: true
     source: path
     version: "1.0.0"
   args:
@@ -152,8 +152,8 @@ packages:
   flutter_commons:
     dependency: "direct main"
     description:
-      path: "E:/Proyectos/Flutter/Modernizacion/flutter_commons"
-      relative: false
+      path: "packages/flutter_commons"
+      relative: true
     source: path
     version: "0.0.1"
   flutter_lints:
