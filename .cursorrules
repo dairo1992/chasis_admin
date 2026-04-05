@@ -1,0 +1,33 @@
+# Flutter Shadcn UI Rules
+
+Always follow these rules when working with the `shadcn_ui` package in this project.
+
+## Core Principles
+1. **Root Configuration**: Ensure `ShadApp` or `ShadApp.custom` is used at the root of the application.
+2. **Material Integration**: For existing Material apps, use `ShadApp.custom`:
+   ```dart
+   ShadApp.custom(
+     appBuilder: (context, child) => MaterialApp(
+       theme: Theme.of(context),
+       builder: (context, child) => ShadAppBuilder(child: child!),
+       home: child,
+     ),
+   )
+   ```
+3. **Typography**: Use the built-in text theme:
+   - `ShadTheme.of(context).textTheme.h1` (and `h2`, `h3`, `h4`, `p`, `blockquote`, `large`, `small`, `muted`).
+4. **Icons**: Use `LucideIcons` (e.g., `LucideIcons.activity`) which is included with the library.
+5. **Responsiveness**: Prefer `ShadResponsiveBuilder` for layout changes based on breakpoints.
+6. **Themes**: Use `ShadThemeData` and `ShadColorScheme` (e.g., `ShadSlateColorScheme.dark()`).
+
+## Component Usage
+- **Buttons**: Use `ShadButton` instead of `ElevatedButton`/`TextButton`.
+- **Inputs**: Use `ShadInput` for text fields.
+- **Alerts**: Use `ShadAlert` or `ShadAlert.destructive` for callouts.
+- **Dialogs**: Use `showShadDialog` for modals.
+- **Toasts**: Use `ShadToaster.of(context).show()` for notifications.
+
+## Best Practices
+- Never lose default shadcn values when overriding themes: use `.copyWith()`.
+- Use `GlobalShadLocalizations.delegate` in your `localizationsDelegates`.
+- Prefer composition of Shadcn components to build complex UIs.

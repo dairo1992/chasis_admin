@@ -9,6 +9,8 @@ environment:
 dependencies:
   app_core:
     path: E:/Proyectos/Flutter/Modernizacion/flutter_core_package
+  flutter_commons:
+    path: E:/Proyectos/Flutter/Modernizacion/flutter_commons
   flutter_bloc: ^9.1.1
   flutter:
     sdk: flutter
