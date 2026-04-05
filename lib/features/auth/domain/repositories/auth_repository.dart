@@ -9,4 +9,6 @@ abstract interface class AuthRepository {
   Future<Either<Failure, void>> logout();
 
   Future<Either<Failure, bool>> isAuthenticated();
+
+  Future<Either<Failure, bool>> remember({required bool rememberMe});
 }

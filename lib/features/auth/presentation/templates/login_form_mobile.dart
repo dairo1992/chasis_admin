@@ -3,7 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class LoginMobileTemplate extends StatelessWidget {
-  const LoginMobileTemplate({super.key});
+  final void Function()? onLoginPressed;
+  final bool isLoading;
+  final ValueChanged<String> onEmailChanged;
+  final ValueChanged<String> onPasswordChanged;
+  final ValueChanged<bool> onRememberMeChanged;
+  final bool rememberMe;
+
+  const LoginMobileTemplate({
+    super.key,
+    required this.isLoading,
+    required this.onLoginPressed,
+    required this.onEmailChanged,
+    required this.onPasswordChanged,
+    required this.onRememberMeChanged,
+    required this.rememberMe,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +28,14 @@ class LoginMobileTemplate extends StatelessWidget {
         child: ShadCard(
           title: Text('Bienvenido', style: ShadTheme.of(context).textTheme.h3),
           description: const Text('Ingresa tus credenciales para continuar'),
-          child: const LoginFormOrganism(),
+          child: LoginFormOrganism(
+            rememberMe: rememberMe,
+            isLoading: isLoading,
+            onLoginPressed: onLoginPressed,
+            onEmailChanged: onEmailChanged,
+            onPasswordChanged: onPasswordChanged,
+            onRememberMeChanged: onRememberMeChanged,
+          ),
         ),
       ),
     );

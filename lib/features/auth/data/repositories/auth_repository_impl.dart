@@ -24,4 +24,9 @@ class AuthRepositoryImpl with RepositoryErrorHandler implements AuthRepository {
   Future<Either<Failure, bool>> isAuthenticated() async {
     return const Right(false);
   }
+
+  @override
+  Future<Either<Failure, bool>> remember({required bool rememberMe}) async {
+    return Right(rememberMe);
+  }
 }

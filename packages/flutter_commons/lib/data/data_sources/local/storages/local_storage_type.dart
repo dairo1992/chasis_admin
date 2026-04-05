@@ -1,0 +1,1 @@
+enum LocalStorageType { permanent, temporal }
