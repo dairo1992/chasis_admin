@@ -9,19 +9,25 @@ environment:
 dependencies:
   app_core:
     path: packages/flutter_core_package
-  flutter_commons:
-    path: packages/flutter_commons
-  flutter_bloc: ^9.1.1
+  dio: ^5.9.2
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.1.1
+  flutter_commons:
+    path: packages/flutter_commons
   get_it: ^9.2.1
   go_router: ^17.1.0
-  shadcn_ui: ^0.53.3
+  isar: ^4.0.0-dev.14
+  isar_flutter_libs: ^4.0.0-dev.14
+  shadcn_ui: ^0.53.5
 
 dev_dependencies:
+  bloc_test: ^10.0.0
+  build_runner: ^2.4.6
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
+  mocktail: ^1.0.4
 
 flutter:
   uses-material-design: true

@@ -5,6 +5,9 @@ import 'package:flutter_commons/dependency_injection/service_locator.dart';
 import 'package:flutter_commons/domain/session_provider.dart';
 import 'package:flutter_commons/enviromnents/values/environment_values.dart';
 
+import '../features/auth/dependency_injection/auth_injector.dart';
+import '../features/home/dependency_injection/home_injector.dart';
+
 DependenciesSetupManager setUpDependencies(
   EnvironmentValues environmentValues,
 ) {
@@ -12,6 +15,8 @@ DependenciesSetupManager setUpDependencies(
 
   final List<DependencyInjector> injectors = [
     CommonDependencyInjection(serviceLocator: serviceLocator),
+    AuthInjector(serviceLocator: serviceLocator),
+    HomeInjector(serviceLocator: serviceLocator),
   ];
 
   for (var item in injectors) {
