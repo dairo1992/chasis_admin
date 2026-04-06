@@ -17,7 +17,7 @@ class _AppState extends State<App> {
       themeMode: ThemeMode.dark,
       darkTheme: ShadThemeData(
         brightness: Brightness.dark,
-        colorScheme: const ShadSlateColorScheme.dark(),
+        colorScheme: const ShadSlateColorScheme.light(),
       ),
       appBuilder: (context) => MaterialApp.router(
         routerConfig: AppRouter.builRouter(),

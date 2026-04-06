@@ -11,6 +11,7 @@ class ResponsiveLayout extends StatelessWidget {
     required this.web,
     required this.mobile,
     required this.tablet,
+    this.headerActions,
     this.headerExceptions = const [],
     this.footerExceptions = const [],
     this.header = const MainHeader(),
@@ -37,6 +38,8 @@ class ResponsiveLayout extends StatelessWidget {
 
   /// Custom footer component (defaults to MainFooter)
   final Widget? footer;
+
+  final List<ShadButton>? headerActions;
 
   @override
   Widget build(BuildContext context) {
