@@ -1,11 +1,9 @@
-import 'dart:convert';
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter_commons/data/data_sources/local/storages/local_storage_data_source.dart';
 import 'package:flutter_commons/utils/interfaces/encodable.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:isar/isar.dart';
-
-import '../../models/local_storage_isar_model.dart';
+import 'package:chasis_admin/core/data/models/local_storage_isar_model.dart';
 
 class LocalDataStorageDataSourceImpl extends LocalStorageDataSource {
   final Isar isar;
@@ -32,13 +30,13 @@ class LocalDataStorageDataSourceImpl extends LocalStorageDataSource {
 
   @override
   Future<void> clearAll() async {
-    await isar.writeTxn(() => isar.localStorageIsarModels.clear());
+    await isar.writeTxn(() => isar.collection<LocalStorageIsarModel>().clear());
   }
 
   @override
   Future<void> remove(String key) async {
     await isar.writeTxn(
-      () => isar.localStorageIsarModels.filter().keyEqualTo(key).deleteAll(),
+      () => isar.collection<LocalStorageIsarModel>().filter().keyEqualTo(key).deleteAll(),
     );
   }
 
@@ -51,16 +49,17 @@ class LocalDataStorageDataSourceImpl extends LocalStorageDataSource {
       finalValue = '${iv.base64}:${encrypted.base64}';
     }
 
-    final entry = LocalStorageIsarModel()
-      ..key = key
-      ..value = finalValue
-      ..isSecure = isSecure;
+    final entry = LocalStorageIsarModel(
+      key: key,
+      value: finalValue,
+      isSecure: isSecure,
+    );
 
     await isar.writeTxn(() => isar.collection<LocalStorageIsarModel>().put(entry));
   }
 
   Future<String?> _retrieve(String key) async {
-    final entry = await isar.collection<LocalStorageIsarModel>().getByKey(key);
+    final entry = await isar.collection<LocalStorageIsarModel>().filter().keyEqualTo(key).findFirst();
     if (entry == null) return null;
 
     if (entry.isSecure) {

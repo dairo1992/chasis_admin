@@ -25,6 +25,12 @@ abstract class ServiceLocator {
     String? instanceName,
   });
 
+  // Registrar Singleton de Dependencias
+  void registerSingleton<T extends Object>(
+    T instance, {
+    String? instanceName,
+  });
+
   // Remover Dependencias
   FutureOr unRegister<T extends Object>({
     Object? instance,
@@ -80,6 +86,17 @@ class ServiceLocatorImpl extends ServiceLocator {
   }) {
     _serviceLocator.registerLazySingleton(
       factoryFunc,
+      instanceName: instanceName,
+    );
+  }
+
+  @override
+  void registerSingleton<T extends Object>(
+    T instance, {
+    String? instanceName,
+  }) {
+    _serviceLocator.registerSingleton<T>(
+      instance,
       instanceName: instanceName,
     );
   }

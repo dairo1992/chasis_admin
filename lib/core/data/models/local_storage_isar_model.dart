@@ -12,4 +12,10 @@ class LocalStorageIsarModel {
   late String value;
 
   late bool isSecure;
+
+  LocalStorageIsarModel({
+    required this.key,
+    required this.value,
+    this.isSecure = false,
+  });
 }

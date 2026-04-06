@@ -15,7 +15,7 @@ class AppConfigStrategyImpl extends AppConfigStrategy {
     WidgetsFlutterBinding.ensureInitialized();
     PlatformConfig.instance.start();
 
-    final configManager = setUpDependencies(_environmentValues);
+    final configManager = await setUpDependencies(_environmentValues);
     await configManager.start();
   }
 
