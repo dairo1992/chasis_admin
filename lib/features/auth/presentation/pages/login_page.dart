@@ -11,7 +11,8 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LoginBloc>(
-      create: (context) => ServiceLocator.instance.get<LoginBloc>(),
+      create: (context) =>
+          ServiceLocator.instance.get<LoginBloc>()..add(const LoginCheckRemembered()),
       child: BlocListener<LoginBloc, LoginState>(
         listener: _listener,
         child: BlocBuilder<LoginBloc, LoginState>(
@@ -19,6 +20,7 @@ class LoginPage extends StatelessWidget {
             final bloc = context.read<LoginBloc>();
             return AuthLayout(
               rememberMe: state.form.rememberMe,
+              email: state.form.email,
               isLoading: state is LoginLoading,
               onLoginPressed: () => bloc.add(LoginSubmitted()),
               onEmailChanged: (v) => bloc.add(LoginEmailChanged(email: v)),

@@ -3,14 +3,14 @@ import '../repositories/auth_repository.dart';
 
 class RememberParams extends UseCaseParams {
   const RememberParams({required this.rememberMe});
-  final bool rememberMe;
+  final String rememberMe;
 }
 
-class RememberUseCase implements UseCase<bool, RememberParams> {
-  RememberUseCase(this._repository);
-  final AuthRepository _repository;
+class RememberUseCase implements UseCase<String, RememberParams> {
+  RememberUseCase({required this.repository});
+  final AuthRepository repository;
 
   @override
-  Future<Either<Failure, bool>> call(RememberParams params) =>
-      _repository.remember(rememberMe: params.rememberMe);
+  Future<Either<Failure, String>> call(RememberParams params) =>
+      repository.remember(rememberMe: params.rememberMe);
 }

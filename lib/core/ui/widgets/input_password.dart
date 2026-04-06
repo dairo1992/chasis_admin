@@ -4,11 +4,13 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 class ShadInputPassword extends StatefulWidget {
   final TextEditingController? controller;
   final Widget? placeholder;
+  final ValueChanged<String>? onChanged;
 
   const ShadInputPassword({
     super.key,
     this.controller,
     this.placeholder,
+    this.onChanged,
   });
 
   @override
@@ -22,6 +24,7 @@ class _ShadInputPasswordState extends State<ShadInputPassword> {
   Widget build(BuildContext context) {
     return ShadInput(
       controller: widget.controller,
+      onChanged: widget.onChanged,
       placeholder: widget.placeholder ?? const Text('Contraseña'),
       obscureText: obscure,
       leading: const Padding(

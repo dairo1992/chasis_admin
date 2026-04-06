@@ -1,4 +1,7 @@
+import 'package:chasis_admin/features/auth/domain/usecases/get_remember_use_case.dart';
+import 'package:chasis_admin/features/auth/domain/usecases/remember_use_case.dart';
 import 'package:chasis_admin/features/auth/presentation/bloc/login_bloc.dart';
+import 'package:flutter_commons/data/data_sources/local/storages/local_storage_data_source.dart';
 import 'package:flutter_commons/dependency_injection/dependency_injector.dart';
 import 'package:flutter_commons/enviromnents/values/environment_values.dart';
 import 'package:flutter_commons/router/app_route.dart';
@@ -43,7 +46,8 @@ class AuthInjector implements DependencyInjector {
 
   void _registerRepositories() {
     serviceLocator.registerLazySingleton<AuthRepository>(
-      () => AuthRepositoryImpl(),
+      () => AuthRepositoryImpl(
+          localStorageDataSource: serviceLocator.get<LocalStorageDataSource>()),
     );
   }
 
@@ -53,25 +57,24 @@ class AuthInjector implements DependencyInjector {
 
   void _registerUseCases() {
     serviceLocator.registerLazySingleton<LoginUseCase>(
-      () => LoginUseCase(serviceLocator.get<AuthRepository>()),
+      () => LoginUseCase(repository: serviceLocator.get<AuthRepository>()),
+    );
+    serviceLocator.registerLazySingleton<GetRememberMeUseCase>(
+      () => GetRememberMeUseCase(
+          repository: serviceLocator.get<AuthRepository>()),
+    );
+    serviceLocator.registerLazySingleton<RememberUseCase>(
+      () => RememberUseCase(repository: serviceLocator.get<AuthRepository>()),
     );
   }
 
   void _registerBlocs() {
     serviceLocator.registerFactory<LoginBloc>(
-      () => LoginBloc(loginUseCase: serviceLocator.get<LoginUseCase>()),
+      () => LoginBloc(
+        loginUseCase: serviceLocator.get<LoginUseCase>(),
+        getRememberMeUseCase: serviceLocator.get<GetRememberMeUseCase>(),
+        rememberUseCase: serviceLocator.get<RememberUseCase>(),
+      ),
     );
   }
 }
-
-//  // Repositories
-//     serviceLocator.registerLazySingleton<AuthRepository>(
-//       () => AuthRepositoryImpl(),
-//     );
-
-//     // Use cases
-//     serviceLocator.registerLazySingleton(
-//       () => LoginUseCase(serviceLocator.get<AuthRepository>()),
-//     );
-
-//     // Route

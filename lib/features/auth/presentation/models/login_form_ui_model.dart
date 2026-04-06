@@ -1,6 +1,9 @@
+import 'package:flutter_commons/domain/value_objects/email_value_object.dart';
+import 'package:flutter_commons/domain/value_objects/password_value_object.dart';
+
 class LoginFormUiModel {
-  final String email;
-  final String password;
+  final EmailValueObject email;
+  final PasswordValueObject password;
   final bool rememberMe;
 
   LoginFormUiModel({
@@ -9,17 +12,32 @@ class LoginFormUiModel {
     required this.rememberMe,
   });
 
-  factory LoginFormUiModel.initial() =>
-      LoginFormUiModel(email: '', password: '', rememberMe: false);
+  factory LoginFormUiModel.initial() => LoginFormUiModel(
+      email: EmailValueObject(input: ''),
+      password: PasswordValueObject(value: ''),
+      rememberMe: false);
+
+  @override
+  bool get isValid => email.isValid() && password.isValid();
+
+  // String? get passwordError {
+  //   return getErrorMessage(
+  //     valueObject: password,
+  //     alphabetSequenceErrorMessage: '',
+  //     notAlphanumericErrorMessage: '',
+  //     notInRangeErrorMessage: '',
+  //   );
+  // }
 
   LoginFormUiModel copyWith({
-    String? email,
-    String? password,
+    EmailValueObject? email,
+    PasswordValueObject? password,
     bool? rememberMe,
     bool? isLoading,
-  }) => LoginFormUiModel(
-    email: email ?? this.email,
-    password: password ?? this.password,
-    rememberMe: rememberMe ?? this.rememberMe,
-  );
+  }) =>
+      LoginFormUiModel(
+        email: email ?? this.email,
+        password: password ?? this.password,
+        rememberMe: rememberMe ?? this.rememberMe,
+      );
 }

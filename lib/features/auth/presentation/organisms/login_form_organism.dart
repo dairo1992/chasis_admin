@@ -2,13 +2,14 @@ import 'package:chasis_admin/core/ui/widgets/input_password.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-class LoginFormOrganism extends StatelessWidget {
+class LoginFormOrganism extends StatefulWidget {
   final void Function()? onLoginPressed;
   final bool isLoading;
   final ValueChanged<String> onEmailChanged;
   final ValueChanged<String> onPasswordChanged;
   final ValueChanged<bool> onRememberMeChanged;
   final bool rememberMe;
+  final String email;
 
   const LoginFormOrganism({
     super.key,
@@ -18,7 +19,36 @@ class LoginFormOrganism extends StatelessWidget {
     required this.onPasswordChanged,
     required this.onRememberMeChanged,
     required this.rememberMe,
+    required this.email,
   });
+
+  @override
+  State<LoginFormOrganism> createState() => _LoginFormOrganismState();
+}
+
+class _LoginFormOrganismState extends State<LoginFormOrganism> {
+  late final TextEditingController _emailController;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController(text: widget.email);
+  }
+
+  @override
+  void didUpdateWidget(covariant LoginFormOrganism oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.email != widget.email &&
+        _emailController.text != widget.email) {
+      _emailController.text = widget.email;
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +57,8 @@ class LoginFormOrganism extends StatelessWidget {
       children: [
         const SizedBox(height: 16),
         ShadInput(
+          controller: _emailController,
+          onChanged: widget.onEmailChanged,
           placeholder: const Text('Correo electrónico'),
           keyboardType: TextInputType.emailAddress,
           leading: const Padding(
@@ -35,17 +67,19 @@ class LoginFormOrganism extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-        ShadInputPassword(),
+        ShadInputPassword(
+          onChanged: widget.onPasswordChanged,
+        ),
         const SizedBox(height: 16),
         ShadCheckbox(
-          value: rememberMe,
-          onChanged: onRememberMeChanged,
+          value: widget.rememberMe,
+          onChanged: widget.onRememberMeChanged,
           label: const Text('Recordarme'),
         ),
         const SizedBox(height: 24),
         ShadButton(
-          onPressed: isLoading ? null : onLoginPressed,
-          child: isLoading
+          onPressed: widget.isLoading ? null : widget.onLoginPressed,
+          child: widget.isLoading
               ? SizedBox.square(
                   dimension: 16,
                   child: CircularProgressIndicator(

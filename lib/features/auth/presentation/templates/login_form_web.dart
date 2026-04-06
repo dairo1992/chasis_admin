@@ -9,6 +9,7 @@ class LoginWebTemplate extends StatelessWidget {
   final ValueChanged<String> onPasswordChanged;
   final ValueChanged<bool> onRememberMeChanged;
   final bool rememberMe;
+  final String email;
 
   const LoginWebTemplate({
     super.key,
@@ -18,6 +19,7 @@ class LoginWebTemplate extends StatelessWidget {
     required this.onPasswordChanged,
     required this.onRememberMeChanged,
     required this.rememberMe,
+    required this.email,
   });
 
   @override
@@ -77,6 +79,7 @@ class LoginWebTemplate extends StatelessWidget {
               onPasswordChanged: onPasswordChanged,
               onRememberMeChanged: onRememberMeChanged,
               rememberMe: rememberMe,
+              email: email,
             ),
           ),
         ),

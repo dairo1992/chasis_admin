@@ -1,7 +1,13 @@
 import 'package:app_core/app_core.dart';
+import 'package:flutter_commons/data/data_sources/local/storages/local_storage_data_source.dart';
 import '../../domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl with RepositoryErrorHandler implements AuthRepository {
+  final LocalStorageDataSource _localStorageDataSource;
+
+  AuthRepositoryImpl({required LocalStorageDataSource localStorageDataSource})
+      : _localStorageDataSource = localStorageDataSource;
+
   @override
   Future<Either<Failure, bool>> login({
     required String email,
@@ -26,7 +32,14 @@ class AuthRepositoryImpl with RepositoryErrorHandler implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> remember({required bool rememberMe}) async {
+  Future<Either<Failure, String>> remember({required String rememberMe}) async {
+    await _localStorageDataSource.saveString('remember_me', rememberMe);
     return Right(rememberMe);
+  }
+
+  @override
+  Future<Either<Failure, String>> getRememberMe() async {
+    final rememberMe = await _localStorageDataSource.readString('remember_me');
+    return Right(rememberMe ?? '');
   }
 }

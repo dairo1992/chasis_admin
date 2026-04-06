@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'package:chasis_admin/core/redirection_handlers/redirection_handler_data.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_commons/router/redirection_handlers/redirection_handler_data.dart';
 import 'package:go_router/go_router.dart';
 
 abstract class RedirectionHandler {

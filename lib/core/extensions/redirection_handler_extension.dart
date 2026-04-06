@@ -1,6 +1,3 @@
-import 'package:flutter_commons/router/base_route.dart';
-import 'package:flutter_commons/router/redirection_handlers/redirection_handler.dart';
-import 'package:flutter_commons/utils/extensions/iterable_extension.dart';
 import 'package:go_router/go_router.dart';
 
 extension RedirectionHandlerExtension on RedirectionHandler {

@@ -8,10 +8,10 @@ class LoginParams extends UseCaseParams {
 }
 
 class LoginUseCase implements UseCase<bool, LoginParams> {
-  LoginUseCase(this._repository);
-  final AuthRepository _repository;
+  LoginUseCase({required this.repository});
+  final AuthRepository repository;
 
   @override
   Future<Either<Failure, bool>> call(LoginParams params) =>
-      _repository.login(email: params.email, password: params.password);
+      repository.login(email: params.email, password: params.password);
 }

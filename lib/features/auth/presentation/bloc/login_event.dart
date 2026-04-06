@@ -22,3 +22,7 @@ class LoginRememberMeChanged extends LoginEvent {
   const LoginRememberMeChanged({required this.rememberMe});
   final bool rememberMe;
 }
+
+class LoginCheckRemembered extends LoginEvent {
+  const LoginCheckRemembered();
+}

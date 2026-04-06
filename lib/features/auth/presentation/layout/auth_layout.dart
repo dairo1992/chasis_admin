@@ -11,6 +11,7 @@ class AuthLayout extends StatelessWidget {
   final ValueChanged<String> onPasswordChanged;
   final ValueChanged<bool> onRememberMeChanged;
   final bool rememberMe;
+  final String email;
 
   const AuthLayout({
     super.key,
@@ -20,6 +21,7 @@ class AuthLayout extends StatelessWidget {
     required this.onPasswordChanged,
     required this.onRememberMeChanged,
     required this.rememberMe,
+    required this.email,
   });
 
   @override
@@ -34,6 +36,7 @@ class AuthLayout extends StatelessWidget {
         onPasswordChanged: onPasswordChanged,
         onRememberMeChanged: onRememberMeChanged,
         rememberMe: rememberMe,
+        email: email,
       ),
       mobile: LoginMobileTemplate(
         isLoading: isLoading,
@@ -42,6 +45,7 @@ class AuthLayout extends StatelessWidget {
         onPasswordChanged: onPasswordChanged,
         onRememberMeChanged: onRememberMeChanged,
         rememberMe: rememberMe,
+        email: email,
       ),
       tablet: LoginMobileTemplate(
         isLoading: isLoading,
@@ -50,6 +54,7 @@ class AuthLayout extends StatelessWidget {
         onPasswordChanged: onPasswordChanged,
         onRememberMeChanged: onRememberMeChanged,
         rememberMe: rememberMe,
+        email: email,
       ),
     );
   }

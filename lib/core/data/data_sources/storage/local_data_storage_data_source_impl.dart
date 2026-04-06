@@ -2,17 +2,17 @@ import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter_commons/data/data_sources/local/storages/local_storage_data_source.dart';
 import 'package:flutter_commons/utils/interfaces/encodable.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:isar/isar.dart';
-import 'package:chasis_admin/core/data/models/local_storage_isar_model.dart';
+import 'package:hive_ce/hive.dart';
+import 'package:chasis_admin/core/data/models/local_storage_model.dart';
 
 class LocalDataStorageDataSourceImpl extends LocalStorageDataSource {
-  final Isar isar;
+  final Box<LocalStorageModel> box;
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
   
-  static const _keyName = 'isar_local_storage_key';
+  static const _keyName = 'storage_encryption_key';
   encrypt.Encrypter? _encrypter;
 
-  LocalDataStorageDataSourceImpl({required this.isar});
+  LocalDataStorageDataSourceImpl({required this.box});
 
   Future<encrypt.Encrypter> _getEncrypter() async {
     if (_encrypter != null) return _encrypter!;
@@ -30,14 +30,12 @@ class LocalDataStorageDataSourceImpl extends LocalStorageDataSource {
 
   @override
   Future<void> clearAll() async {
-    await isar.writeTxn(() => isar.collection<LocalStorageIsarModel>().clear());
+    await box.clear();
   }
 
   @override
   Future<void> remove(String key) async {
-    await isar.writeTxn(
-      () => isar.collection<LocalStorageIsarModel>().filter().keyEqualTo(key).deleteAll(),
-    );
+    await box.delete(key);
   }
 
   Future<void> _store(String key, String value, bool isSecure) async {
@@ -49,17 +47,17 @@ class LocalDataStorageDataSourceImpl extends LocalStorageDataSource {
       finalValue = '${iv.base64}:${encrypted.base64}';
     }
 
-    final entry = LocalStorageIsarModel(
+    final entry = LocalStorageModel(
       key: key,
       value: finalValue,
       isSecure: isSecure,
     );
 
-    await isar.writeTxn(() => isar.collection<LocalStorageIsarModel>().put(entry));
+    await box.put(key, entry);
   }
 
   Future<String?> _retrieve(String key) async {
-    final entry = await isar.collection<LocalStorageIsarModel>().filter().keyEqualTo(key).findFirst();
+    final entry = box.get(key);
     if (entry == null) return null;
 
     if (entry.isSecure) {

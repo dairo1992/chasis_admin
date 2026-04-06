@@ -7,40 +7,30 @@ import 'package:flutter_commons/enviromnents/values/environment_values.dart';
 
 import '../features/auth/dependency_injection/auth_injector.dart';
 import '../features/home/dependency_injection/home_injector.dart';
-import 'package:chasis_admin/core/data/models/local_storage_isar_model.dart';
+import 'package:chasis_admin/core/data/models/local_storage_model.dart';
 import 'package:chasis_admin/core/data/data_sources/storage/local_data_storage_data_source_impl.dart';
 import 'package:flutter_commons/data/data_sources/local/storages/local_storage_data_source.dart';
 
-import 'package:isar/isar.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:flutter/foundation.dart';
+import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 
 Future<DependenciesSetupManager> setUpDependencies(
   EnvironmentValues environmentValues,
 ) async {
   final serviceLocator = ServiceLocator.instance;
 
-  // Initialize Isar
-  late Isar isar;
-  if (kIsWeb) {
-    isar = await Isar.open(
-      [LocalStorageIsarModelSchema],
-      directory: '',
-      inspector: !kReleaseMode,
-    );
-  } else {
-    final dir = await getApplicationDocumentsDirectory();
-    isar = await Isar.open(
-      [LocalStorageIsarModelSchema],
-      directory: dir.path,
-      inspector: !kReleaseMode,
-    );
+  // Initialize Hive
+  await Hive.initFlutter();
+  
+  if (!Hive.isAdapterRegistered(0)) {
+    Hive.registerAdapter(LocalStorageModelAdapter());
   }
 
-  // Register Isar and Data Source
-  serviceLocator.registerSingleton<Isar>(isar);
+  final box = await Hive.openBox<LocalStorageModel>('local_storage');
+
+  // Register Box and Data Source
+  serviceLocator.registerSingleton<Box<LocalStorageModel>>(box);
   serviceLocator.registerLazySingleton<LocalStorageDataSource>(
-    () => LocalDataStorageDataSourceImpl(isar: isar),
+    () => LocalDataStorageDataSourceImpl(box: box),
   );
 
   final List<DependencyInjector> injectors = [

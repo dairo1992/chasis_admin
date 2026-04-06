@@ -1,1 +1,0 @@
-enum AppFlavor { dev, qa, prod }
