@@ -1,6 +1,6 @@
+import 'package:app_core/data/storage/local_storage.dart';
+import 'package:app_core/utils/interfaces/encodable.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
-import 'package:flutter_commons/data/data_sources/local/storages/local_storage_data_source.dart';
-import 'package:flutter_commons/utils/interfaces/encodable.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:chasis_admin/core/data/models/local_storage_model.dart';
@@ -8,7 +8,7 @@ import 'package:chasis_admin/core/data/models/local_storage_model.dart';
 class LocalDataStorageDataSourceImpl extends LocalStorageDataSource {
   final Box<LocalStorageModel> box;
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
-  
+
   static const _keyName = 'storage_encryption_key';
   encrypt.Encrypter? _encrypter;
 
@@ -65,7 +65,7 @@ class LocalDataStorageDataSourceImpl extends LocalStorageDataSource {
         final encrypter = await _getEncrypter();
         final parts = entry.value.split(':');
         if (parts.length != 2) return null;
-        
+
         final iv = encrypt.IV.fromBase64(parts[0]);
         final encrypted = encrypt.Encrypted.fromBase64(parts[1]);
         return encrypter.decrypt(encrypted, iv: iv);
@@ -133,7 +133,8 @@ class LocalDataStorageDataSourceImpl extends LocalStorageDataSource {
   ) async {
     final value = await _retrieve(key);
     if (value == null) return null;
-    return decodeList(value, decoder);
+    //return decodeList(value, decoder);
+    return null; //TODO: implement decodeList
   }
 
   @override
@@ -144,5 +145,11 @@ class LocalDataStorageDataSourceImpl extends LocalStorageDataSource {
     final value = await _retrieve(key);
     if (value == null) return null;
     return decode(value, decoder);
+  }
+
+  @override
+  Future<bool> containsKey(String key) {
+    // TODO: implement containsKey
+    throw UnimplementedError();
   }
 }

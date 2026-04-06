@@ -1,5 +1,5 @@
-import 'package:flutter_commons/domain/value_objects/email_value_object.dart';
-import 'package:flutter_commons/domain/value_objects/password_value_object.dart';
+import 'package:app_core/domain/value_objects/email_value_object.dart';
+import 'package:app_core/domain/value_objects/password_value_object.dart';
 
 class LoginFormUiModel {
   final EmailValueObject email;
@@ -17,8 +17,8 @@ class LoginFormUiModel {
       password: PasswordValueObject(value: ''),
       rememberMe: false);
 
-  @override
-  bool get isValid => email.isValid() && password.isValid();
+  // @override
+  // bool get isValid => email.isValid() && password.isValid();
 
   // String? get passwordError {
   //   return getErrorMessage(

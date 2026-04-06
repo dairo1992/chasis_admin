@@ -1,6 +1,6 @@
+import 'package:app_core/utils/display_platform/display_platform.dart';
+import 'package:app_core/utils/display_platform/display_platform_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_commons/utils/display_platform/display_platform.dart';
-import 'package:flutter_commons/utils/display_platform/display_platform_provider.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:chasis_admin/core/ui/atomic/organisms/main_header.dart';
 import 'package:chasis_admin/core/ui/atomic/organisms/main_footer.dart';
@@ -54,21 +54,12 @@ class ResponsiveLayout extends StatelessWidget {
               child: ShadResponsiveBuilder(
                 builder: (context, breakpoint) {
                   if (breakpoint >= ShadTheme.of(context).breakpoints.lg) {
-                    return web ??
-                        tablet ??
-                        mobile ??
-                        const Center(child: Text('No Web view provided'));
+                    return web;
                   }
                   if (breakpoint >= ShadTheme.of(context).breakpoints.md) {
-                    return tablet ??
-                        mobile ??
-                        web ??
-                        const Center(child: Text('No Tablet view provided'));
+                    return tablet;
                   }
-                  return mobile ??
-                      tablet ??
-                      web ??
-                      const Center(child: Text('No Mobile view provided'));
+                  return mobile;
                 },
               ),
             ),

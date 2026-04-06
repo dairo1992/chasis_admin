@@ -1,21 +1,21 @@
 import 'dart:async';
+import 'package:app_core/domain/providers/session_provider.dart';
+import 'package:app_core/domain/providers/tokens_provider.dart';
+import 'package:chasis_admin/core/router/redirection_handlers/redirection_handler.dart';
+import 'package:chasis_admin/core/router/redirection_handlers/redirection_handler_data.dart';
+import 'package:chasis_admin/core/router/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_commons/domain/providers/tokens_provider.dart';
-import 'package:flutter_commons/domain/session_provider.dart';
-import 'package:flutter_commons/router/redirection_handlers/redirection_handler.dart';
-import 'package:flutter_commons/router/redirection_handlers/redirection_handler_data.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../routes.dart';
 
 class SessionValidationRedirectionHandler implements RedirectionHandler {
   factory SessionValidationRedirectionHandler.init({
     required TokensProvider tokensProvider,
     required SessionProvider sessionProvider,
-  }) => SessionValidationRedirectionHandler._(
-    tokensProvider: tokensProvider,
-    sessionProvider: sessionProvider,
-  );
+  }) =>
+      SessionValidationRedirectionHandler._(
+        tokensProvider: tokensProvider,
+        sessionProvider: sessionProvider,
+      );
 
   SessionValidationRedirectionHandler._({
     required this.tokensProvider,

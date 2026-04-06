@@ -1,6 +1,6 @@
+import 'package:app_core/enviromnents/values/environment_values.dart';
 import 'package:chasis_admin/config/platform/platform_config_app.dart'
     if (dart.library.html) 'package:chasis_admin/config/platform/platform_config_web.dart';
-import 'package:flutter_commons/enviromnents/values/environment_values.dart';
 
 abstract class PlatformConfig {
   static PlatformConfig instance = PlatformConfigImpl() as PlatformConfig;

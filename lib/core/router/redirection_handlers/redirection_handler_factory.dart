@@ -1,5 +1,5 @@
-import 'package:chasis_admin/core/redirection_handlers/implementations/redirection_handler_type.dart';
-import 'package:chasis_admin/core/redirection_handlers/implementations/route_data_validation_redirection_handler.dart';
+import 'package:chasis_admin/core/router/redirection_handlers/implementations/redirection_handler_type.dart';
+import 'package:chasis_admin/core/router/redirection_handlers/implementations/route_data_validation_redirection_handler.dart';
 
 class RedirectionHandlerFactory {
   final RouteDataValidationRedirectionHandler

@@ -1,9 +1,9 @@
+import 'package:app_core/app_config/app_config_strategy.dart';
+import 'package:app_core/enviromnents/environment_values_provider.dart';
+import 'package:app_core/enviromnents/values/environment_values.dart';
 import 'package:chasis_admin/config/platform/platform.dart';
 import 'package:chasis_admin/dependency_injection/dependencies_injection.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_commons/app_config/app_config_strategy.dart';
-import 'package:flutter_commons/enviromnents/environment_values_provider.dart';
-import 'package:flutter_commons/enviromnents/values/environment_values.dart';
 
 class AppConfigStrategyImpl extends AppConfigStrategy {
   EnvironmentValues get _environmentValues {

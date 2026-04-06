@@ -1,3 +1,5 @@
+import 'package:app_core/domain/value_objects/email_value_object.dart';
+import 'package:app_core/domain/value_objects/password_value_object.dart';
 import 'package:chasis_admin/features/auth/domain/usecases/get_remember_use_case.dart';
 import 'package:chasis_admin/features/auth/domain/usecases/remember_use_case.dart';
 import 'package:chasis_admin/features/auth/presentation/models/login_form_ui_model.dart';
@@ -40,7 +42,9 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
       (failure) => null,
       (email) {
         if (email.isNotEmpty) {
-          emit(LoginFormUpdated(form: form.copyWith(email: email, rememberMe: true)));
+          emit(LoginFormUpdated(
+              form: form.copyWith(
+                  email: EmailValueObject(input: email), rememberMe: true)));
         }
       },
     );
@@ -53,7 +57,8 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
     emit(LoginLoading(form: form));
 
     final result = await _loginUseCase(
-      LoginParams(email: form.email, password: form.password),
+      LoginParams(
+          email: form.email.wrappedValue, password: form.password.wrappedValue),
     );
     debugPrint('Login result: $result');
     await result.fold(
@@ -61,7 +66,7 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
       (success) async {
         if (success) {
           // Handle remember me logic
-          final emailToSave = form.rememberMe ? form.email : '';
+          final emailToSave = form.rememberMe ? form.email.wrappedValue : '';
           await _rememberUseCase(RememberParams(rememberMe: emailToSave));
 
           emit(LoginSuccess(form: form));
@@ -69,7 +74,8 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
           emit(
             LoginFailure(
               form: form,
-              failure: const UnexpectedFailure(message: 'Credenciales inválidas'),
+              failure:
+                  const UnexpectedFailure(message: 'Credenciales inválidas'),
             ),
           );
         }
@@ -81,14 +87,17 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
     LoginEmailChanged event,
     Emitter<LoginState> emit,
   ) async {
-    emit(LoginFormUpdated(form: form.copyWith(email: event.email)));
+    emit(LoginFormUpdated(
+        form: form.copyWith(email: EmailValueObject(input: event.email))));
   }
 
   Future<void> _onLoginPasswordChanged(
     LoginPasswordChanged event,
     Emitter<LoginState> emit,
   ) async {
-    emit(LoginFormUpdated(form: form.copyWith(password: event.password)));
+    emit(LoginFormUpdated(
+        form: form.copyWith(
+            password: PasswordValueObject(value: event.password))));
   }
 
   Future<void> _onLoginRememberMeChanged(

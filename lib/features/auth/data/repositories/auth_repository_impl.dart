@@ -1,6 +1,5 @@
 import 'package:app_core/app_core.dart';
-import 'package:flutter_commons/data/data_sources/local/storages/local_storage_data_source.dart';
-import '../../domain/repositories/auth_repository.dart';
+import 'package:chasis_admin/features/auth/domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl with RepositoryErrorHandler implements AuthRepository {
   final LocalStorageDataSource _localStorageDataSource;

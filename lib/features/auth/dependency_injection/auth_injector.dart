@@ -1,12 +1,12 @@
+import 'package:app_core/data/storage/local_storage.dart';
+import 'package:app_core/dependency_injection/dependency_injector.dart';
+import 'package:app_core/dependency_injection/service_locator.dart';
+import 'package:app_core/enviromnents/values/environment_values.dart';
+import 'package:chasis_admin/core/router/app_route.dart';
+import 'package:chasis_admin/core/router/routes.dart';
 import 'package:chasis_admin/features/auth/domain/usecases/get_remember_use_case.dart';
 import 'package:chasis_admin/features/auth/domain/usecases/remember_use_case.dart';
 import 'package:chasis_admin/features/auth/presentation/bloc/login_bloc.dart';
-import 'package:flutter_commons/data/data_sources/local/storages/local_storage_data_source.dart';
-import 'package:flutter_commons/dependency_injection/dependency_injector.dart';
-import 'package:flutter_commons/enviromnents/values/environment_values.dart';
-import 'package:flutter_commons/router/app_route.dart';
-import 'package:flutter_commons/router/routes.dart';
-import 'package:flutter_commons/dependency_injection/service_locator.dart';
 
 import '../domain/repositories/auth_repository.dart';
 import '../data/repositories/auth_repository_impl.dart';

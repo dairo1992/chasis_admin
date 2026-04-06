@@ -1,8 +1,8 @@
+import 'package:app_core/utils/display_platform/display_platform.dart';
 import 'package:chasis_admin/core/ui/atomic/templates/responsive_main_template.dart';
 import 'package:chasis_admin/features/auth/presentation/templates/login_form_mobile.dart';
 import 'package:chasis_admin/features/auth/presentation/templates/login_form_web.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_commons/utils/display_platform/display_platform.dart';
 
 class AuthLayout extends StatelessWidget {
   final void Function()? onLoginPressed;

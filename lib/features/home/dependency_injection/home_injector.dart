@@ -1,10 +1,9 @@
-import 'package:flutter_commons/dependency_injection/dependency_injector.dart';
-import 'package:flutter_commons/dependency_injection/service_locator.dart';
-import 'package:flutter_commons/enviromnents/values/environment_values.dart';
-import 'package:flutter_commons/router/app_route.dart';
-import 'package:flutter_commons/router/routes.dart';
-
-import '../presentation/pages/home_page.dart';
+import 'package:app_core/dependency_injection/dependency_injector.dart';
+import 'package:app_core/dependency_injection/service_locator.dart';
+import 'package:app_core/enviromnents/values/environment_values.dart';
+import 'package:chasis_admin/core/router/app_route.dart';
+import 'package:chasis_admin/core/router/routes.dart';
+import 'package:chasis_admin/features/home/presentation/pages/home_page.dart';
 
 class HomeInjector implements DependencyInjector {
   final ServiceLocator serviceLocator;

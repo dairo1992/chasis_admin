@@ -1,5 +1,5 @@
+import 'package:app_core/enviromnents/values/environment_values.dart';
 import 'package:chasis_admin/config/platform/platform.dart';
-import 'package:flutter_commons/enviromnents/values/environment_values.dart';
 
 class PlatformConfigImpl extends PlatformConfig {
   @override

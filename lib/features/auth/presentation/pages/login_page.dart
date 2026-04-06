@@ -1,7 +1,9 @@
+import 'package:chasis_admin/core/extensions/service_locator_extension.dart';
+import 'package:chasis_admin/core/router/routes.dart';
 import 'package:chasis_admin/features/auth/presentation/layout/auth_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_commons/dependency_injection/service_locator.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import '../bloc/login_bloc.dart';
 
@@ -12,7 +14,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<LoginBloc>(
       create: (context) =>
-          ServiceLocator.instance.get<LoginBloc>()..add(const LoginCheckRemembered()),
+          context.resolve<LoginBloc>()..add(const LoginCheckRemembered()),
       child: BlocListener<LoginBloc, LoginState>(
         listener: _listener,
         child: BlocBuilder<LoginBloc, LoginState>(
@@ -20,9 +22,9 @@ class LoginPage extends StatelessWidget {
             final bloc = context.read<LoginBloc>();
             return AuthLayout(
               rememberMe: state.form.rememberMe,
-              email: state.form.email,
+              email: state.form.email.wrappedValue,
               isLoading: state is LoginLoading,
-              onLoginPressed: () => bloc.add(LoginSubmitted()),
+              onLoginPressed: () => bloc.add(const LoginSubmitted()),
               onEmailChanged: (v) => bloc.add(LoginEmailChanged(email: v)),
               onPasswordChanged: (v) =>
                   bloc.add(LoginPasswordChanged(password: v)),
@@ -40,9 +42,13 @@ class LoginPage extends StatelessWidget {
       Future.microtask(() {
         if (!context.mounted) return;
         ShadToaster.of(context).show(
-          const ShadToast(description: Text('Sesión iniciada correctamente')),
+          const ShadToast(
+            description: Text('Sesión iniciada correctamente'),
+            alignment: Alignment.topRight,
+          ),
         );
       });
+      context.goNamed(Routes.home.name);
     } else if (state is LoginFailure) {
       Future.microtask(() {
         if (!context.mounted) return;

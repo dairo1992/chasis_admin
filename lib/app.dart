@@ -1,6 +1,6 @@
+import 'package:app_core/utils/strings.dart';
+import 'package:chasis_admin/core/router/app_router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_commons/router/app_router.dart';
-import 'package:flutter_commons/utils/strings.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class App extends StatefulWidget {
