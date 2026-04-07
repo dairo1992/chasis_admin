@@ -1,5 +1,6 @@
 import 'package:app_core/utils/display_platform/display_platform.dart';
 import 'package:app_core/utils/display_platform/display_platform_provider.dart';
+import 'package:chasis_admin/core/ui/atomic/organisms/layout/multi_target_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:chasis_admin/core/ui/atomic/organisms/main_header.dart';
@@ -48,6 +49,27 @@ class ResponsiveLayout extends StatelessWidget {
     final showHeader = !headerExceptions.contains(currentPlatform);
     final showFooter = !footerExceptions.contains(currentPlatform);
 
+    //    final headerActions = [
+    //   ShadButton.ghost(
+    //     onPressed: () {},
+    //     hoverBackgroundColor: theme.colorScheme.foreground,
+    //     child: Icon(
+    //       LucideIcons.user,
+    //       size: 16,
+    //       color: theme.colorScheme.primaryForeground,
+    //     ),
+    //   ),
+    //   ShadButton.ghost(
+    //     onPressed: () {},
+    //     hoverBackgroundColor: theme.colorScheme.foreground,
+    //     child: Icon(
+    //       LucideIcons.logOut,
+    //       size: 16,
+    //       color: theme.colorScheme.primaryForeground,
+    //     ),
+    //   ),
+    // ],
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -56,13 +78,18 @@ class ResponsiveLayout extends StatelessWidget {
             Expanded(
               child: ShadResponsiveBuilder(
                 builder: (context, breakpoint) {
-                  if (breakpoint >= ShadTheme.of(context).breakpoints.lg) {
-                    return web;
-                  }
-                  if (breakpoint >= ShadTheme.of(context).breakpoints.md) {
-                    return tablet;
-                  }
-                  return mobile;
+                  return MultiTargetLayout(
+                    desktop: () => web,
+                    tablet: () => tablet,
+                    mobile: () => mobile,
+                  );
+                  // if (breakpoint >= ShadTheme.of(context).breakpoints.lg) {
+                  //   return web;
+                  // }
+                  // if (breakpoint >= ShadTheme.of(context).breakpoints.md) {
+                  //   return tablet;
+                  // }
+                  // return mobile;
                 },
               ),
             ),

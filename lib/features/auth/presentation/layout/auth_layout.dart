@@ -1,5 +1,5 @@
 import 'package:app_core/utils/display_platform/display_platform.dart';
-import 'package:chasis_admin/core/ui/atomic/templates/responsive_main_template.dart';
+import 'package:chasis_admin/core/ui/atomic/templates/app_scaffold.dart';
 import 'package:chasis_admin/features/auth/presentation/templates/login_form_mobile.dart';
 import 'package:chasis_admin/features/auth/presentation/templates/login_form_web.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,36 +26,43 @@ class AuthLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveLayout(
-      headerExceptions: const [DisplayPlatform.app, DisplayPlatform.web],
-      footerExceptions: const [DisplayPlatform.app, DisplayPlatform.web],
-      web: LoginWebTemplate(
-        isLoading: isLoading,
-        onLoginPressed: onLoginPressed,
-        onEmailChanged: onEmailChanged,
-        onPasswordChanged: onPasswordChanged,
-        onRememberMeChanged: onRememberMeChanged,
-        rememberMe: rememberMe,
-        email: email,
-      ),
-      mobile: LoginMobileTemplate(
-        isLoading: isLoading,
-        onLoginPressed: onLoginPressed,
-        onEmailChanged: onEmailChanged,
-        onPasswordChanged: onPasswordChanged,
-        onRememberMeChanged: onRememberMeChanged,
-        rememberMe: rememberMe,
-        email: email,
-      ),
-      tablet: LoginMobileTemplate(
-        isLoading: isLoading,
-        onLoginPressed: onLoginPressed,
-        onEmailChanged: onEmailChanged,
-        onPasswordChanged: onPasswordChanged,
-        onRememberMeChanged: onRememberMeChanged,
-        rememberMe: rememberMe,
-        email: email,
-      ),
+    return AppScaffold(
+      headerExclusions: const [
+        DisplayPlatform.app,
+        DisplayPlatform.web,
+      ],
+      footerExclusions: const [
+        DisplayPlatform.app,
+        DisplayPlatform.web,
+      ],
+      desktopBody: _buildWebTemplate(),
+      tabletBody: _buildMobileTemplate(),
+      mobileBody: _buildMobileTemplate(),
+      body: _buildMobileTemplate(),
+    );
+  }
+
+  Widget _buildWebTemplate() {
+    return LoginWebTemplate(
+      isLoading: isLoading,
+      onLoginPressed: onLoginPressed,
+      onEmailChanged: onEmailChanged,
+      onPasswordChanged: onPasswordChanged,
+      onRememberMeChanged: onRememberMeChanged,
+      rememberMe: rememberMe,
+      email: email,
+    );
+  }
+
+  Widget _buildMobileTemplate() {
+    return LoginMobileTemplate(
+      isLoading: isLoading,
+      onLoginPressed: onLoginPressed,
+      onEmailChanged: onEmailChanged,
+      onPasswordChanged: onPasswordChanged,
+      onRememberMeChanged: onRememberMeChanged,
+      rememberMe: rememberMe,
+      email: email,
     );
   }
 }

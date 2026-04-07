@@ -1,4 +1,5 @@
-import 'package:chasis_admin/core/ui/atomic/templates/responsive_main_template.dart';
+import 'package:chasis_admin/core/ui/atomic/templates/app_scaffold.dart';
+import 'package:chasis_admin/core/ui/models/admin_nav_item.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
@@ -7,43 +8,105 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveLayout(
-      headerActions: [
-        ShadButton.ghost(
-          onPressed: () {},
-          hoverBackgroundColor: ShadTheme.of(context).colorScheme.foreground,
-          child: Icon(
-            LucideIcons.user,
-            size: 16,
-            color: ShadTheme.of(context).colorScheme.primaryForeground,
-          ),
-        ),
-        // const SizedBox(width: 8),
-        ShadButton.ghost(
-          onPressed: () {},
-          hoverBackgroundColor: ShadTheme.of(context).colorScheme.foreground,
-          child: Icon(
-            LucideIcons.logOut,
-            size: 16,
-            color: ShadTheme.of(context).colorScheme.primaryForeground,
-          ),
-        ),
-      ],
-      web: _buildWeb(context),
-      mobile: _buildMobile(context),
-      tablet: _buildTablet(context),
+    return AppScaffold(
+      navItems: List.generate(25, (index) {
+        return AdminNavItem(
+            id: '$index',
+            icon: Icons.abc_rounded,
+            label: 'Home',
+            subItems: List.generate(
+                2,
+                (index) => AdminNavItem(
+                      id: '$index',
+                      icon: Icons.abc_rounded,
+                      label: 'Home',
+                      onTap: () => debugPrint('Home'),
+                    )));
+      }),
+      selectedNavId: 'home',
+      body: _HomeBody(),
     );
   }
+}
 
-  Widget _buildWeb(BuildContext context) {
-    return const SizedBox.shrink();
+class _HomeBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final theme = ShadTheme.of(context);
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Dashboard', style: theme.textTheme.h1),
+          const SizedBox(height: 16),
+          Text(
+            'Bienvenido al panel de administración del Chasis.',
+            style: theme.textTheme.lead,
+          ),
+          const SizedBox(height: 32),
+          ShadCard(
+            title: const Text('Resumen de Actividad'),
+            description: const Text(
+              'Visualiza el estado actual de tus servicios.',
+            ),
+            footer: ShadButton(
+              onPressed: () {},
+              child: const Text('Ver Detalles Completos'),
+            ),
+            child: const Column(
+              children: [
+                _StatusRow(label: 'Servidor Principal', isOnline: true),
+                Divider(),
+                _StatusRow(label: 'Base de Datos', isOnline: true),
+                Divider(),
+                _StatusRow(label: 'Servicios de Auth', isOnline: false),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
+}
 
-  Widget _buildMobile(BuildContext context) {
-    return const SizedBox.shrink();
-  }
+class _StatusRow extends StatelessWidget {
+  final String label;
+  final bool isOnline;
 
-  Widget _buildTablet(BuildContext context) {
-    return const SizedBox.shrink();
+  const _StatusRow({required this.label, required this.isOnline});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = ShadTheme.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(label, style: theme.textTheme.p),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8,
+              vertical: 4,
+            ),
+            decoration: BoxDecoration(
+              color: isOnline
+                  ? Colors.green.withValues(alpha: 0.1)
+                  : Colors.red.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              isOnline ? 'ONLINE' : 'OFFLINE',
+              style: theme.textTheme.small.copyWith(
+                color: isOnline ? Colors.green : Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

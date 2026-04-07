@@ -1,0 +1,8 @@
+Analyzing 3 items...                                            
+
+   info - Use 'const' with the constructor to improve performance - lib\features\home\presentation\pages\home_page.dart:44:20 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\features\home\presentation\pages\home_page.dart:45:25 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\features\home\presentation\pages\home_page.dart:46:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\home\presentation\pages\home_page.dart:48:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\home\presentation\pages\home_page.dart:50:17 - prefer_const_constructors
+
