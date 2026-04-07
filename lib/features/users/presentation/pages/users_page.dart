@@ -1,7 +1,7 @@
 import 'package:app_core/utils/enums/display_target.dart';
 import 'package:app_core/utils/extensions/context_display_target_extension.dart';
 import 'package:chasis_admin/core/services/services_locator_impl.dart';
-import 'package:chasis_admin/core/ui/atomic/templates/app_scaffold.dart';
+import 'package:chasis_admin/core/ui/templates/app_scaffold.dart';
 import 'package:chasis_admin/features/users/domain/entities/user_entity.dart';
 import 'package:chasis_admin/features/users/presentation/bloc/users_bloc.dart';
 import 'package:chasis_admin/features/users/presentation/organisms/user_form_widget.dart';

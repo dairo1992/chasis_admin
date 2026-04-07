@@ -1,7 +1,7 @@
 ﻿import 'package:app_core/utils/display_platform/display_platform.dart';
 import 'package:app_core/utils/display_platform/display_platform_provider.dart';
-import 'package:chasis_admin/core/ui/atomic/organisms/admin_content_section.dart';
-import 'package:chasis_admin/core/ui/atomic/organisms/layout/layout_type_defs.dart';
+import 'package:chasis_admin/core/ui/organisms/admin_content_section.dart';
+import 'package:chasis_admin/core/ui/organisms/layout/layout_type_defs.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 

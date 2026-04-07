@@ -1,5 +1,5 @@
 import 'package:app_core/utils/display_platform/display_platform.dart';
-import 'package:chasis_admin/core/ui/atomic/templates/app_scaffold.dart';
+import 'package:chasis_admin/core/ui/templates/app_scaffold.dart';
 import 'package:chasis_admin/features/auth/presentation/templates/login_form_mobile.dart';
 import 'package:chasis_admin/features/auth/presentation/templates/login_form_web.dart';
 import 'package:flutter/cupertino.dart';

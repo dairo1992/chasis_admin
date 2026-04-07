@@ -1,5 +1,4 @@
-import 'package:chasis_admin/core/ui/atomic/templates/app_scaffold.dart';
-import 'package:chasis_admin/core/ui/models/admin_nav_item.dart';
+import 'package:chasis_admin/core/ui/templates/app_scaffold.dart';
 import 'package:chasis_admin/core/ui/config/nav_items_config.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';

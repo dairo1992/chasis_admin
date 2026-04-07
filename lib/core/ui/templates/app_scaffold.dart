@@ -1,9 +1,9 @@
 import 'package:app_core/utils/display_platform/display_platform.dart';
 import 'package:app_core/utils/display_platform/display_platform_provider.dart';
-import 'package:chasis_admin/core/ui/atomic/organisms/admin_nav.dart';
-import 'package:chasis_admin/core/ui/atomic/organisms/layout/multi_target_layout.dart';
-import 'package:chasis_admin/core/ui/atomic/organisms/main_footer.dart';
-import 'package:chasis_admin/core/ui/atomic/organisms/main_header.dart';
+import 'package:chasis_admin/core/ui/organisms/admin_nav.dart';
+import 'package:chasis_admin/core/ui/organisms/layout/multi_target_layout.dart';
+import 'package:chasis_admin/core/ui/organisms/main_footer.dart';
+import 'package:chasis_admin/core/ui/organisms/main_header.dart';
 import 'package:chasis_admin/core/ui/models/admin_nav_item.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -85,14 +85,12 @@ class AppScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentPlatform =
-        DisplayPlatformProvider.instance.get().current;
+    final currentPlatform = DisplayPlatformProvider.instance.get().current;
 
     final showHeader = !headerExclusions.contains(currentPlatform);
     final showFooter = !footerExclusions.contains(currentPlatform);
 
-    final headerWidget =
-        header ?? MainHeader(actions: headerActions);
+    final headerWidget = header ?? MainHeader(actions: headerActions);
     final footerWidget = footer ?? const MainFooter();
 
     return Scaffold(
@@ -126,8 +124,7 @@ class AppScaffold extends StatelessWidget {
     // En desktop: sidebar + body. En mobile/tablet: solo body.
     return ShadResponsiveBuilder(
       builder: (context, breakpoint) {
-        final isDesktop =
-            breakpoint >= ShadTheme.of(context).breakpoints.lg;
+        final isDesktop = breakpoint >= ShadTheme.of(context).breakpoints.lg;
 
         if (isDesktop) {
           return Row(
@@ -152,8 +149,7 @@ class AppScaffold extends StatelessWidget {
 
     return ShadResponsiveBuilder(
       builder: (context, breakpoint) {
-        final isDesktop =
-            breakpoint >= ShadTheme.of(context).breakpoints.lg;
+        final isDesktop = breakpoint >= ShadTheme.of(context).breakpoints.lg;
 
         if (isDesktop) return const SizedBox.shrink();
 

@@ -1,7 +1,7 @@
 import 'package:app_core/utils/display_platform/display_platform.dart';
 import 'package:app_core/utils/enums/display_target.dart';
 import 'package:app_core/utils/extensions/context_display_target_extension.dart';
-import 'package:chasis_admin/core/ui/atomic/organisms/layout/base_display_target_wrapper.dart';
+import 'package:chasis_admin/core/ui/organisms/layout/base_display_target_wrapper.dart';
 import 'package:flutter/material.dart';
 
 class DisplayTargetWrapper extends BaseDisplayTargetWrapper {

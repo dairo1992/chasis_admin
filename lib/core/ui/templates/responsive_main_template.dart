@@ -1,10 +1,10 @@
 import 'package:app_core/utils/display_platform/display_platform.dart';
 import 'package:app_core/utils/display_platform/display_platform_provider.dart';
-import 'package:chasis_admin/core/ui/atomic/organisms/layout/multi_target_layout.dart';
+import 'package:chasis_admin/core/ui/organisms/layout/multi_target_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:chasis_admin/core/ui/atomic/organisms/main_header.dart';
-import 'package:chasis_admin/core/ui/atomic/organisms/main_footer.dart';
+import 'package:chasis_admin/core/ui/organisms/main_header.dart';
+import 'package:chasis_admin/core/ui/organisms/main_footer.dart';
 
 class ResponsiveLayout extends StatelessWidget {
   const ResponsiveLayout({
@@ -83,13 +83,6 @@ class ResponsiveLayout extends StatelessWidget {
                     tablet: () => tablet,
                     mobile: () => mobile,
                   );
-                  // if (breakpoint >= ShadTheme.of(context).breakpoints.lg) {
-                  //   return web;
-                  // }
-                  // if (breakpoint >= ShadTheme.of(context).breakpoints.md) {
-                  //   return tablet;
-                  // }
-                  // return mobile;
                 },
               ),
             ),

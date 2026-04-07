@@ -1,4 +1,4 @@
-import 'package:chasis_admin/core/ui/atomic/organisms/layout/layout_type_defs.dart';
+import 'package:chasis_admin/core/ui/organisms/layout/layout_type_defs.dart';
 import 'package:flutter/material.dart';
 
 abstract class BaseDisplayTargetWrapper extends StatelessWidget {
