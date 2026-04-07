@@ -1,5 +1,6 @@
 import 'package:chasis_admin/core/ui/atomic/templates/app_scaffold.dart';
 import 'package:chasis_admin/core/ui/models/admin_nav_item.dart';
+import 'package:chasis_admin/core/ui/config/nav_items_config.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
@@ -9,20 +10,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      navItems: List.generate(25, (index) {
-        return AdminNavItem(
-            id: '$index',
-            icon: Icons.abc_rounded,
-            label: 'Home',
-            subItems: List.generate(
-                2,
-                (index) => AdminNavItem(
-                      id: '$index',
-                      icon: Icons.abc_rounded,
-                      label: 'Home',
-                      onTap: () => debugPrint('Home'),
-                    )));
-      }),
+      navItems: getAdminNavItems(context),
       selectedNavId: 'home',
       body: _HomeBody(),
     );

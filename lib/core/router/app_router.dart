@@ -14,13 +14,14 @@ class AppRouter {
   static GoRouter _buildRouter() {
     GoRouter.optionURLReflectsImperativeAPIs = true;
     final serviceLocator = ServiceLocatorImpl.instance;
-    const initialLocation = Routes.authentication;
+    const initialLocation = Routes.home;
 
     final List<AppRoute> routes = [];
 
     final Iterable<AppRoute> featuresRoutes = [
       Routes.authentication,
       Routes.home,
+      Routes.users,
     ].map((route) => serviceLocator.get<AppRoute>(instanceName: route.name));
 
     routes.addAll(featuresRoutes.toList());

@@ -9,6 +9,7 @@ import 'package:chasis_admin/core/data/data_sources/storage/local_data_storage_d
 import 'package:chasis_admin/core/services/services_locator_impl.dart';
 import 'package:chasis_admin/features/auth/dependency_injection/auth_injector.dart';
 import 'package:chasis_admin/features/home/dependency_injection/home_injector.dart';
+import 'package:chasis_admin/features/users/dependency_injection/users_injector.dart';
 
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 
@@ -36,6 +37,7 @@ Future<DependenciesSetupManager> setUpDependencies(
     CoreDependencyInjection(serviceLocator: serviceLocator),
     AuthInjector(serviceLocator: serviceLocator),
     HomeInjector(serviceLocator: serviceLocator),
+    UsersInjector(serviceLocator: serviceLocator),
   ];
 
   for (var item in injectors) {
