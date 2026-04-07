@@ -244,18 +244,21 @@ class _MoreMenuButton extends StatelessWidget {
             title: const Text('Más Opciones'),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: items
-                    .map((item) => ListTile(
-                          leading: Icon(item.icon),
-                          title: Text(item.label),
-                          onTap: () {
-                            Navigator.pop(context);
-                            if (item.onTap != null) item.onTap!();
-                          },
-                        ))
-                    .toList(),
+              child: Material(
+                color: Colors.transparent,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: items
+                      .map((item) => ListTile(
+                            leading: Icon(item.icon),
+                            title: Text(item.label),
+                            onTap: () {
+                              Navigator.pop(context);
+                              if (item.onTap != null) item.onTap!();
+                            },
+                          ))
+                      .toList(),
+                ),
               ),
             ),
           ),
